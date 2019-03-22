@@ -67,14 +67,15 @@
   <div class="container">
 
     <div class="search">
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <form class="form-inline" method="POST">
+        {% csrf_token %}
+        {{ form.name }}
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Pin</button>
       </form>
     </div>
 
 
-
+ {% for city_weather in weather_data %}
     <div class="card">
       <div class="topdiv">
         <p style="text-align:center;">
@@ -115,7 +116,7 @@
 
     </div>
 
-
+{% endfor %}
 
   </div>
 
