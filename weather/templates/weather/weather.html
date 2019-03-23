@@ -45,7 +45,7 @@
         margin-top: 10px;
       }
       .search{
-        width: 19rem;
+        width: 20rem;
         margin: auto;
         margin-top: 10px;
       }
@@ -55,7 +55,7 @@
 <body>
   <header>
     <nav class="navbar navbar-light bg-light">
-      <a class="navbar-brand" href="#" style="font-weight:bold;">
+      <a class="navbar-brand" href="{% url 'index' %}" style="font-weight:bold;">
         <span style="font-size: 30px; color: Dodgerblue;">
           <i class="fas fa-cloud"></i>
         </span>
@@ -75,8 +75,14 @@
     </div>
 
 
- {% for city_weather in weather_data %}
+    {% for city_weather in weather_data %}
     <div class="card">
+
+      <div class="position-absolute">
+        <a href="{% url 'delete' city_weather.id %}" class="fas fa-trash-alt" style="font-size: 15px; color: Dodgerblue;margin:10px; background:white; border:0px;"></a>
+
+      </div>
+
       <div class="topdiv">
         <p style="text-align:center;">
           <img src="https://openweathermap.org/img/w/{{ city_weather.icon }}.png" height=120 width=120 />
@@ -86,7 +92,7 @@
           <span style="font-size: 15px;font-weight:100;">{{ city_weather.description|title }}</span>
 
           <br>
-          <span style="font-size: 20px;">{{ city_weather.city|title }},{{ city_weather.country|upper }}</span>
+          <span style="font-size: 20px;">{{ city_weather.city|title }}, {{ city_weather.country|upper }}</span>
         </p>
       </div>
 
@@ -116,7 +122,7 @@
 
     </div>
 
-{% endfor %}
+    {% endfor %}
 
   </div>
 

@@ -1,5 +1,5 @@
 import requests
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import City
 from .forms import CityForm
 # Create your views here.
@@ -30,7 +30,13 @@ def index(request):
             'wind_speed':req['wind']['speed'],
             'description':req['weather'][0]['description'],
             'icon':req['weather'][0]['icon'],
+            'id': city.id,
         }
         weather_data.append(city_weather)
 
     return render(request,'weather/weather.html',{'weather_data':weather_data,'form':form})
+
+def delete(request,city_id):
+    item = City.objects.get(pk=city_id)
+    item.delete()
+    return redirect('index')
