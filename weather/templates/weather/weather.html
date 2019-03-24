@@ -19,11 +19,14 @@
     body{
       font-family: 'Roboto', sans-serif;
     }
+    .mini_container{
+      text-align: center;
+    }
     .card{
-      margin: auto;
-      width: 16rem;
-      float: left;
+      display: inline-block;
       margin: 10px;
+      width: 16rem;
+
     }
     .smalldiv{
       height:80px;
@@ -73,8 +76,8 @@
         <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Pin</button>
       </form>
     </div>
-
-
+    <br>
+  <div class="mini_container">
     {% for city_weather in weather_data %}
     <div class="card">
 
@@ -123,6 +126,8 @@
     </div>
 
     {% endfor %}
+
+  </div>
 
   </div>
 
