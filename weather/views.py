@@ -3,20 +3,31 @@ from django.shortcuts import render,redirect
 from .models import City
 from .forms import CityForm
 from decouple import config
+from geotext import GeoText
 # Create your views here.
 def index(request):
     url = 'https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid='+config('API_KEY')
+    citie = City.objects.all()
 
     if request.method == 'POST':
         form = CityForm(request.POST)
-        form.save()
+        data_recieved = request.POST
+        city_name = data_recieved['name']
+        city_name = city_name.title()
+        places = GeoText(city_name)
+        city_check = places.cities
+
+        #for checking the city name and if already exsist
+        if(city_name in city_check):
+            form.save()            
+        else:
+            return redirect('index')
+
 
     form = CityForm()
-
-    cities = City.objects.all()
     weather_data=[]
 
-    for city in cities:
+    for city in citie:
 
         req = requests.get(url.format(city)).json()
 
